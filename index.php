@@ -1,10 +1,8 @@
-
 <?php
+// Устанавливаем часовой пояс
 date_default_timezone_set('Asia/Almaty');
 
-// Получаем текущую дату
-$day = date('d');
-
+// Создаём форматтер даты на русском языке
 $formatter = new IntlDateFormatter(
     'ru_RU',
     IntlDateFormatter::NONE,
@@ -14,6 +12,8 @@ $formatter = new IntlDateFormatter(
     'MMMM'
 );
 
+// Получаем текущую дату
+$day = date('d');
 $mon = $formatter->format(time());
 $year = date('Y');
 
@@ -21,6 +21,8 @@ $year = date('Y');
 $hour = (int) date('H');
 
 // Определяем приветствие
+$welcome = '';
+
 if ($hour >= 0 && $hour < 6) {
     $welcome = 'Доброй ночи';
 } elseif ($hour >= 6 && $hour < 12) {
@@ -39,28 +41,60 @@ if ($hour >= 0 && $hour < 6) {
 <head>
     <meta charset="UTF-8">
     <title>Моя лабораторная работа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #336699;
+        }
+
+        blockquote {
+            background: #e8f2ff;
+            padding: 15px;
+            border-left: 5px solid #336699;
+        }
+    </style>
 </head>
+
 <body>
+<div class="container">
 
-<h1><?= $welcome ?>, Гость!</h1>
+    <h1><?= $welcome ?>, Гость!</h1>
 
-<blockquote>
-    <?php
-    echo 'Сегодня ', $day, ' число, ',
-         $mon, ' месяц, ', $year, ' год.';
-    ?>
-</blockquote>
+    <h2>Текущая дата</h2>
 
-<h3>Зачем мы ходим в школу?</h3>
+    <blockquote>
+        <?php
+        echo 'Сегодня ', $day, ' число, ',
+             $mon, ' месяц, ', $year, ' год.';
+        ?>
+    </blockquote>
 
-<p>
-    Мы ходим в школу, чтобы получать знания,
-    развиваться, учиться новому и общаться с друзьями.
-</p>
+    <h3>Зачем мы ходим в школу?</h3>
 
-<hr>
+    <p>
+        Мы ходим в школу, чтобы получать знания,
+        развиваться, учиться новому и общаться с друзьями.
+    </p>
 
-<p>© Все права защищены, <?= $year ?></p>
+    <hr>
 
+    <p>
+        © Все права защищены, <?= $year ?>
+    </p>
+
+</div>
 </body>
 </html>
